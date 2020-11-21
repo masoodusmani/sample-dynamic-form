@@ -20,10 +20,20 @@ const AirFields = () => {
     </div>
   );
 };
+const RailFields = () => {
+  const { register } = useFormContext();
+  return (
+    <div>
+      <label htmlFor="lading">lading</label>
+      <input name="lading" id="lading" ref={register} />
+    </div>
+  );
+};
 
 export const TypeMap = {
   sea: <SeaFields />,
-  air: <AirFields />
+  air: <AirFields />,
+  rail: <RailFields />
 };
 export const TransportSpecificFields = ({ shipmentType }) => {
   console.log(shipmentType);
