@@ -2,13 +2,21 @@ import React from "react";
 
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
 
+const TypeMap = {
+  sea: <SeaFields />,
+  air: <AirFields />
+};
+const TransportSpecificFields = ({ shipmentType }) => {
+  return React.cloneElement(TypeMap[shipmentType]);
+};
 export const Form = ({ shipment, onClose, onSubmit }) => {
   return (
     <FormContainer shipment={shipment} onClose={onClose} onSubmit={onSubmit}>
       <HiddenFields />
       <BaseFields />
-      {shipment?.type === "sea" && <SeaFields />}
-      {shipment?.type === "air" && <AirFields />}
+      {/* {shipment?.type === "sea" && <SeaFields />}
+      {shipment?.type === "air" && <AirFields />} */}
+      <TransportSpecificFields shipmentType={shipment?.type} />
     </FormContainer>
   );
 };
