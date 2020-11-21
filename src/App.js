@@ -1,0 +1,28 @@
+import React from "react";
+import "./styles.css";
+import { Form } from "./Form";
+export default function App() {
+  const [s, setS] = React.useState();
+  const [ss, setSs] = React.useState([
+    { id: "1", ref: "a1" },
+    { id: "2", ref: "a2" }
+  ]);
+  const onClose = () => setS();
+  const onSubmit = (data) => {
+    setSs((curr) =>
+      curr.map((shipment) => (shipment.id === data.id ? data : shipment))
+    );
+    // console.log(ss);
+    setS();
+  };
+  return (
+    <div className="App">
+      {ss.map((s) => (
+        <div key={s.ref}>
+          {s.ref} <button onClick={() => setS(s)}> edit</button>
+        </div>
+      ))}
+      {s && <Form shipment={s} onClose={onClose} onSubmit={onSubmit} />}
+    </div>
+  );
+}
