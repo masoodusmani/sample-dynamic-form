@@ -12,7 +12,7 @@ export const Form = ({ shipment, onClose, onSubmit }) => {
     <FormContainer shipment={shipment} onClose={onClose} onSubmit={onSubmit}>
       <HiddenFields />
       <BaseFields />
-      <TransportSpecificFields shipmentType={shipment?.type} />
+      <TransportSpecificFields shipment={shipment} />
     </FormContainer>
   );
 };

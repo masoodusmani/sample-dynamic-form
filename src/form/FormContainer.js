@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
-
+import { transportSpecificFields } from "./TransportSpecificFields";
 export const FormContainer = ({ shipment, onSubmit, onClose, children }) => {
   // This seems to be the only downside, that the
   // default values are separated from the fields themselves,
@@ -10,9 +10,7 @@ export const FormContainer = ({ shipment, onSubmit, onClose, children }) => {
       id: shipment?.id,
       type: shipment?.type,
       ref: shipment?.ref,
-      carrier: shipment?.carrier,
-      airline: shipment?.airline,
-      lading: shipment?.lading
+      ...transportSpecificFields(shipment)
     }),
     [shipment]
   );
