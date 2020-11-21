@@ -1,7 +1,19 @@
 import React from "react";
 
 import { useForm, FormProvider, useFormContext } from "react-hook-form";
+
 export const Form = ({ shipment, onClose, onSubmit }) => {
+  return (
+    <FormContainer shipment={shipment} onClose={onClose} onSubmit={onSubmit}>
+      <HiddenFields />
+      <BaseFields />
+      {shipment?.type === "sea" && <SeaFields />}
+      {shipment?.type === "air" && <AirFields />}
+    </FormContainer>
+  );
+};
+
+const FormContainer = ({ shipment, onSubmit, onClose, children }) => {
   const defaultValues = React.useMemo(
     () => ({
       id: shipment?.id,
@@ -25,18 +37,30 @@ export const Form = ({ shipment, onClose, onSubmit }) => {
   return (
     <FormProvider {...methods}>
       <form onSubmit={submit}>
-        <input hidden name="id" id="id" ref={register} />
-        <input hidden name="type" id="type" ref={register} />
-
-        <label htmlFor="ref">ref</label>
-        <input name="ref" id="ref" ref={register} />
-        {shipment?.type === "sea" && <SeaFields />}
-        {shipment?.type === "air" && <AirFields />}
+        {children}
         <br />
         <button type="submit">Submit</button>
         <button onClick={onClose}>Cancel</button>
       </form>
     </FormProvider>
+  );
+};
+const HiddenFields = () => {
+  const { register } = useFormContext();
+  return (
+    <>
+      <input hidden name="id" id="id" ref={register} />
+      <input hidden name="type" id="type" ref={register} />
+    </>
+  );
+};
+const BaseFields = () => {
+  const { register } = useFormContext();
+  return (
+    <div>
+      <label htmlFor="ref">ref</label>
+      <input name="ref" id="ref" ref={register} />
+    </div>
   );
 };
 
