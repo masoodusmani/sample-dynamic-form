@@ -2,6 +2,9 @@ import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 
 export const FormContainer = ({ shipment, onSubmit, onClose, children }) => {
+  // This seems to be the only downside, that the
+  // default values are separated from the fields themselves,
+  // so it's easy to forget to add them here
   const defaultValues = React.useMemo(
     () => ({
       id: shipment?.id,
