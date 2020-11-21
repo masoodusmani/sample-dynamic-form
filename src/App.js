@@ -5,7 +5,7 @@ export default function App() {
   const [s, setS] = React.useState();
   const [ss, setSs] = React.useState([
     { id: "1", ref: "a1", type: "sea", carrier: "Maersk" },
-    { id: "2", ref: "a2", type: "air" }
+    { id: "2", ref: "a2", type: "air", airline: "Lufthansa" }
   ]);
   const onClose = () => setS();
   const onSubmit = (data) => {

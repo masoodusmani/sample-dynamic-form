@@ -7,7 +7,8 @@ export const Form = ({ shipment, onClose, onSubmit }) => {
       id: shipment?.id,
       type: shipment?.type,
       ref: shipment?.ref,
-      carrier: shipment?.carrier
+      carrier: shipment?.carrier,
+      airline: shipment?.airline
     }),
     [shipment]
   );
@@ -30,6 +31,7 @@ export const Form = ({ shipment, onClose, onSubmit }) => {
         <label htmlFor="ref">ref</label>
         <input name="ref" id="ref" ref={register} />
         {shipment?.type === "sea" && <SeaFields />}
+        {shipment?.type === "air" && <AirFields />}
         <br />
         <button type="submit">Submit</button>
         <button onClick={onClose}>Cancel</button>
@@ -45,6 +47,17 @@ const SeaFields = () => {
       <label htmlFor="carrier">carrier</label>
 
       <input name="carrier" id="carrier" ref={register} />
+    </div>
+  );
+};
+
+const AirFields = () => {
+  const { register } = useFormContext();
+  return (
+    <div>
+      <label htmlFor="airline">airline</label>
+
+      <input name="airline" id="airline" ref={register} />
     </div>
   );
 };
